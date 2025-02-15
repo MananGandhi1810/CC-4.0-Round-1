@@ -14,6 +14,7 @@ import axios from "axios";
 import NoPageFound from "@/pages/404.jsx";
 import IdeaFeedback from "./pages/IdeaFeedback";
 import WhiteBoard from "./pages/WhiteBoard";
+import Competitor from "./pages/Competitor";
 
 function App() {
     const initialState = {
@@ -113,6 +114,16 @@ function App() {
                         return null;
                     },
                     element: <WhiteBoard />,
+                },
+                {
+                    path: "/competitor",
+                    loader: ({ request }) => {
+                        if (!user.isAuthenticated) {
+                            return redirect("/login?next=/competitors");
+                        }
+                        return null;
+                    },
+                    element: <Competitor />,
                 },
                 {
                     path: "*",

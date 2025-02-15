@@ -50,78 +50,88 @@ function IdeaFeedback() {
     };
 
     return (
-        <div className="p-10 md:h-full-w-nav flex md:flex-row flex-col items-center justify-center">
-            <div className="max-w-md w-full rounded-lg shadow-xl p-6 flex-1">
-                <h2 className="text-2xl font-bold mb-6 text-center text-gray-100">
-                    AI Enhanced Idea Feedback
-                </h2>
-                <form onSubmit={handleSubmit} className="space-y-4">
-                    <div className="grid gap-1">
-                        <Label className="text-gray-100">Problem:</Label>
-                        <Textarea
-                            className="text-gray-100 border border-gray-600 rounded-md p-2"
-                            value={problemStatement}
-                            onChange={(e) =>
-                                setProblemStatement(e.target.value)
+        <div className="p-10 md:h-full-w-nav flex md:flex-row flex-col items-center justify-center gap-10">
+            <Card className="max-w-md w-full text-gray-100">
+                <CardHeader>
+                    <CardTitle>AI Enhanced Idea Feedback</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                        <div className="grid gap-1">
+                            <Label className="text-gray-100">Problem:</Label>
+                            <Textarea
+                                className="text-gray-100 border border-gray-600 rounded-md p-2"
+                                value={problemStatement}
+                                onChange={(e) =>
+                                    setProblemStatement(e.target.value)
+                                }
+                            />
+                        </div>
+                        <div className="grid gap-1">
+                            <Label className="text-gray-100">Industry:</Label>
+                            <Input
+                                type="text"
+                                className="text-gray-100 border border-gray-600 rounded-md p-2"
+                                value={industry}
+                                onChange={(e) => setIndustry(e.target.value)}
+                            />
+                        </div>
+                        <div className="grid gap-1">
+                            <Label className="text-gray-100">
+                                Description:
+                            </Label>
+                            <Textarea
+                                className="text-gray-100 border border-gray-600 rounded-md p-2"
+                                value={description}
+                                onChange={(e) => setDescription(e.target.value)}
+                            />
+                        </div>
+                        <div className="grid gap-1">
+                            <Label className="text-gray-100">
+                                Target Market:
+                            </Label>
+                            <Input
+                                type="text"
+                                className="text-gray-100 border border-gray-600 rounded-md p-2"
+                                value={targetMarket}
+                                onChange={(e) =>
+                                    setTargetMarket(e.target.value)
+                                }
+                            />
+                        </div>
+                        <div className="grid gap-1">
+                            <Label className="text-gray-100">
+                                Unique Selling Proposition:
+                            </Label>
+                            <Input
+                                type="text"
+                                className="text-gray-100 border border-gray-600 rounded-md p-2"
+                                value={usp}
+                                onChange={(e) => setUsp(e.target.value)}
+                            />
+                        </div>
+                        <Button
+                            type="submit"
+                            className="w-full transition-colors"
+                            disabled={
+                                !usp ||
+                                !targetMarket ||
+                                !problemStatement ||
+                                !industry ||
+                                !description ||
+                                loading
                             }
-                        />
-                    </div>
-                    <div className="grid gap-1">
-                        <Label className="text-gray-100">Industry:</Label>
-                        <Input
-                            type="text"
-                            className="text-gray-100 border border-gray-600 rounded-md p-2"
-                            value={industry}
-                            onChange={(e) => setIndustry(e.target.value)}
-                        />
-                    </div>
-                    <div className="grid gap-1">
-                        <Label className="text-gray-100">Description:</Label>
-                        <Textarea
-                            className="text-gray-100 border border-gray-600 rounded-md p-2"
-                            value={description}
-                            onChange={(e) => setDescription(e.target.value)}
-                        />
-                    </div>
-                    <div className="grid gap-1">
-                        <Label className="text-gray-100">Target Market:</Label>
-                        <Input
-                            type="text"
-                            className="text-gray-100 border border-gray-600 rounded-md p-2"
-                            value={targetMarket}
-                            onChange={(e) => setTargetMarket(e.target.value)}
-                        />
-                    </div>
-                    <div className="grid gap-1">
-                        <Label className="text-gray-100">
-                            Unique Selling Proposition:
-                        </Label>
-                        <Input
-                            type="text"
-                            className="text-gray-100 border border-gray-600 rounded-md p-2"
-                            value={usp}
-                            onChange={(e) => setUsp(e.target.value)}
-                        />
-                    </div>
-                    <Button
-                        type="submit"
-                        className="w-full transition-colors"
-                        disabled={
-                            !usp ||
-                            !targetMarket ||
-                            !problemStatement ||
-                            !industry ||
-                            !description ||
-                            loading
-                        }
-                    >
-                        {loading && <Loader2 className="animate-spin mr-2" />}
-                        {loading ? "Evaluating..." : "Evaluate"}
-                    </Button>
-                </form>
-            </div>
+                        >
+                            {loading && (
+                                <Loader2 className="animate-spin mr-2" />
+                            )}
+                            {loading ? "Evaluating..." : "Evaluate"}
+                        </Button>
+                    </form>
+                </CardContent>
+            </Card>
             {analysis && (
-                <div className="mt-6 flex-1 space-y-4 flex flex-col align-middle items-center justify-center">
+                <div className="flex-1 space-y-4 flex flex-col align-middle items-center justify-center">
                     <div className="flex flex-row gap-4">
                         <Card className="rounded-lg shadow-xl bg-gray-800 text-gray-100">
                             <CardHeader>

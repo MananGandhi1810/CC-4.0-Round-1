@@ -74,6 +74,12 @@ export default function NavBar() {
                         >
                             AI WhiteBoarding
                         </Link>
+                        <Link
+                            to="/competitor"
+                            className="text-gray-100 hover:text-white relative after:bg-white after:absolute after:h-0.5 after:w-0 after:-bottom-1 after:left-0 hover:after:w-full after:transition-all duration-300"
+                        >
+                            Competitors
+                        </Link>
                     </nav>
                     <div className="flex items-center justify-end gap-4 ">
                         {!user.isAuthenticated ? (
@@ -165,6 +171,12 @@ export default function NavBar() {
                                         className="text-sm font-medium text-gray-100 hover:text-white"
                                     >
                                         AI WhiteBoarding
+                                    </Link>
+                                    <Link
+                                        to="/competitor"
+                                        className="text-sm font-medium text-gray-100 hover:text-white"
+                                    >
+                                        Competitors
                                     </Link>
                                 </div>
                             </SheetContent>
