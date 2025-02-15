@@ -1,14 +1,27 @@
 import { Globe } from "@/components/ui/globe";
+import { Motion, spring } from "react-motion";
 
 export function Hero() {
     return (
-        <div className="relative flex items-center justify-center overflow-hidden rounded-lg bg-background px-40 pb-40 pt-8 md:pb-60 md:shadow-xl h-full-w-nav">
-            <div className="flex flex-col items-center text-gray-500">
-                <span className="pointer-events-none whitespace-pre-wrap bg-clip-text text-center text-8xl font-semibold leading-none z-10">
-                    Dream Scale
-                </span>
-                <span className="text-4xl z-10 text-center">Scale Your Startup Beyond Your Dreams</span>
-            </div>
+        <div className="relative flex items-center justify-center overflow-hidden rounded-lg bg-background px-40 pb-40 pt-8 md:pb-60 md:shadow-xl h-full">
+            <Motion
+                defaultStyle={{ opacity: 0 }}
+                style={{ opacity: spring(1, { stiffness: 80, damping: 10 }) }}
+            >
+                {(interpolatedStyle) => (
+                    <div
+                        style={{ opacity: interpolatedStyle.opacity }}
+                        className="flex flex-col items-center text-gray-500 z-50 h-full align-middle justify-center"
+                    >
+                        <span className="pointer-events-none whitespace-pre-wrap bg-clip-text text-center text-8xl font-semibold leading-none">
+                            Dream Scale
+                        </span>
+                        <span className="pointer-events-none text-4xl text-center">
+                            Scale Your Startup Beyond Your Dreams
+                        </span>
+                    </div>
+                )}
+            </Motion>
             <Globe className="md:scale-100 scale-75" />
         </div>
     );

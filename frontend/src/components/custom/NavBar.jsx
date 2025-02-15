@@ -49,14 +49,13 @@ export default function NavBar() {
                 <div className="flex-1 flex flex-row">
                     <Link
                         to="/"
-                        className="flex items-center gap-2 justify-start w-min md:flex-grow-0 flex-1"
+                        className="flex items-center gap-2 justify-start md:flex-grow-0 flex-1 min-w-[200px]"
                     >
-                        <Speech color="white" />{" "}
-                        <span className="font-medium text-white">
+                        <span className="font-medium text-white text-xl">
                             DreamScale
                         </span>
                     </Link>
-                    <nav className="hidden items-center gap-6 justify-center text-sm font-medium md:flex flex-1">
+                    <nav className="hidden items-center gap-6 justify-center text-sm font-medium md:flex w-full">
                         <Link
                             to="/"
                             className="text-gray-100 hover:text-white relative after:bg-white after:absolute after:h-0.5 after:w-0 after:-bottom-1 after:left-0 hover:after:w-full after:transition-all duration-300"
@@ -70,7 +69,7 @@ export default function NavBar() {
                             About
                         </Link>
                     </nav>
-                    <div className="flex items-center justify-end gap-4 w-[66px]">
+                    <div className="flex items-center justify-end gap-4 ">
                         {!user.isAuthenticated ? (
                             <div className="flex gap-4">
                                 <Button variant="outline" asChild>
