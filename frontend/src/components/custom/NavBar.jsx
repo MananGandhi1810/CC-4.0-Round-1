@@ -87,15 +87,18 @@ export default function NavBar() {
                                 </Button>
                             </div>
                         ) : (
-                            <div className="flex flex-row items-center gap-4">
+                            <div className="flex items-center w-[200px] justify-end">
                                 <AlertDialog>
                                     <AlertDialogTrigger>
                                         <Button
                                             variant="ghost"
                                             size="icon"
-                                            className="rounded-full hover:bg-black"
+                                            className="rounded-full hover:bg-black w-10"
                                         >
-                                            <LogOut color="white" />
+                                            <LogOut
+                                                color="white"
+                                                className="w-10"
+                                            />
                                         </Button>
                                     </AlertDialogTrigger>
                                     <AlertDialogContent>

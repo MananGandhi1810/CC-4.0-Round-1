@@ -83,9 +83,11 @@ def login():
 def protected():
     current_user = get_jwt_identity()
     user = userDB.find_one({"email": current_user})
-    name = user["name"]
+
     return (
-        jsonify({"message": "You are accessing a protected page, {}!".format(name)}),
+        jsonify(
+            {"message": "User data retrieved", "success": True, "data": {"user": user}}
+        ),
         200,
     )
 

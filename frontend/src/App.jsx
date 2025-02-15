@@ -12,6 +12,7 @@ import AuthContext from "@/providers/auth-context.jsx";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import NoPageFound from "@/pages/404.jsx";
+import IdeaFeedback from "./pages/IdeaFeedback";
 
 function App() {
     const initialState = {
@@ -40,6 +41,7 @@ function App() {
                 validateStatus: false,
             })
             .then((res) => res.data);
+        console.log()
         if (!res.success) {
             setUser(initialState);
             return;
@@ -99,7 +101,7 @@ function App() {
                         }
                         return null;
                     },
-                    element: <NoPageFound />,
+                    element: <IdeaFeedback />,
                 },
                 {
                     path: "*",
@@ -110,6 +112,7 @@ function App() {
     ]);
 
     useEffect(() => {
+        console.log(user);
         localStorage.setItem("user", JSON.stringify(user));
     }, [user]);
 

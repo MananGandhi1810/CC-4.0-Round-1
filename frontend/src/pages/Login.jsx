@@ -42,7 +42,7 @@ function Login() {
             .then((res) => res.data);
         if (res.success) {
             setUser({
-                id: res.data.user.id,
+                id: res.data.user._id.$oid,
                 name: res.data.user.name,
                 email: res.data.user.email,
                 token: res.data.token,
