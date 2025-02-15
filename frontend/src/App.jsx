@@ -92,6 +92,16 @@ function App() {
                     element: <Register />,
                 },
                 {
+                    path: "/idea-feedback",
+                    loader: ({ request }) => {
+                        if (!user.isAuthenticated) {
+                            return redirect("/login?next=/idea-feedback");
+                        }
+                        return null;
+                    },
+                    element: <NoPageFound />,
+                },
+                {
                     path: "*",
                     element: <NoPageFound />,
                 },
