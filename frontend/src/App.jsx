@@ -13,6 +13,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import NoPageFound from "@/pages/404.jsx";
 import IdeaFeedback from "./pages/IdeaFeedback";
+import WhiteBoard from "./pages/WhiteBoard";
 
 function App() {
     const initialState = {
@@ -41,7 +42,7 @@ function App() {
                 validateStatus: false,
             })
             .then((res) => res.data);
-        console.log()
+        console.log();
         if (!res.success) {
             setUser(initialState);
             return;
@@ -102,6 +103,16 @@ function App() {
                         return null;
                     },
                     element: <IdeaFeedback />,
+                },
+                {
+                    path: "/whiteboard",
+                    loader: ({ request }) => {
+                        if (!user.isAuthenticated) {
+                            return redirect("/login?next=/whiteboard");
+                        }
+                        return null;
+                    },
+                    element: <WhiteBoard />,
                 },
                 {
                     path: "*",
