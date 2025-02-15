@@ -4,16 +4,20 @@ import os
 import json
 import re
 from dotenv import load_dotenv
+
 load_dotenv()
+
 
 def setup_gemini():
     """Initialize Gemini API client."""
     genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
+
 def clean_json_response(response_text):
     """Extracts and cleans JSON from AI response if enclosed in triple backticks."""
     json_match = re.search(r"```json\n(.*)\n```", response_text, re.DOTALL)
     return json_match.group(1) if json_match else response_text
+
 
 def analyze_business_idea(description, industry, target_market, usp, problem):
     """Generates a SWOT analysis and feasibility score in JSON format using Gemini AI."""
@@ -40,15 +44,16 @@ def analyze_business_idea(description, industry, target_market, usp, problem):
 
     response = model.generate_content(prompt)
 
-    if not response or not hasattr(response, 'text'):
+    if not response or not hasattr(response, "text"):
         return {"error": "No response from AI model."}
 
-    cleaned_json = clean_json_response(response.text)  
+    cleaned_json = clean_json_response(response.text)
 
     try:
-        return json.loads(cleaned_json)  
+        return json.loads(cleaned_json)
     except json.JSONDecodeError:
         return {"error": "Failed to parse AI response. Please try again."}
+
 
 setup_gemini()
 st.title("AI Business Idea Analyzer")
