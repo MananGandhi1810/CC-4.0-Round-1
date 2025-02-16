@@ -20,5 +20,3 @@ services:
       - 3000:3000/tcp
     depends_on:
       - cc25-backend
-    environment:
-      REACT_APP_SERVER_URL: http://127.0.0.1:8000
