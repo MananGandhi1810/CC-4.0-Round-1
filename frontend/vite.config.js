@@ -12,7 +12,12 @@ export default defineConfig((mode) => {
             },
         },
         define: {
-            "process.env.SERVER_URL": JSON.stringify("https://cc-backend.mpst.me"),
+            "process.env.SERVER_URL": JSON.stringify(
+                "https://cc-backend.mpst.me",
+            ),
+            "process.env.GOOGLE_API_KEY": JSON.stringify(
+                env.REACT_APP_GOOGLE_API_KEY,
+            ),
         },
     };
 });

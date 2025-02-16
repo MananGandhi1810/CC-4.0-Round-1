@@ -1,7 +1,5 @@
-"use client";
-
-import { useState, FormEvent } from "react";
-import { Send, Bot, Paperclip, Mic, CornerDownLeft } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Bot, CornerDownLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
     ChatBubble,
@@ -16,47 +14,74 @@ import {
 } from "@/components/ui/expandable-chat";
 import { ChatMessageList } from "@/components/ui/chat-message-list";
 import { Textarea } from "../ui/textarea";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
+const GOOGLE_AI_KEY = process.env.GOOGLE_API_KEY;
+console.log(GOOGLE_AI_KEY);
 
 export function AIChat() {
     const [messages, setMessages] = useState([]);
-
     const [input, setInput] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+    const [genAI, setGenAI] = useState(null);
 
-    const handleSubmit = (e) => {
+    useEffect(() => {
+        const genAI = new GoogleGenerativeAI(GOOGLE_AI_KEY);
+        setGenAI(genAI);
+    }, []);
+
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!input.trim()) return;
+        if (!input.trim() || !genAI) return;
 
-        setMessages((prev) => [
-            ...prev,
-            {
-                id: prev.length + 1,
-                content: input,
-                role: "user",
-            },
-        ]);
+        const userMessage = {
+            id: messages.length + 1,
+            content: input,
+            role: "user",
+        };
+
+        setMessages((prev) => [...prev, userMessage]);
         setInput("");
         setIsLoading(true);
 
-        setTimeout(() => {
+        try {
+            const model = genAI.getGenerativeModel({
+                model: "gemini-2.0-flash",
+            });
+
+            const chat = model.startChat({
+                history: messages.map((msg) => ({
+                    role: msg.role,
+                    parts: [{ text: msg.content }],
+                })),
+            });
+
+            const result = await chat.sendMessage(input);
+            const response = await result.response;
+            const text = response.text();
+
             setMessages((prev) => [
                 ...prev,
                 {
                     id: prev.length + 1,
-                    content: "This is an AI response to your message.",
+                    content: text,
                     role: "model",
                 },
             ]);
+        } catch (error) {
+            console.error("Error:", error);
+            setMessages((prev) => [
+                ...prev,
+                {
+                    id: prev.length + 1,
+                    content:
+                        "Sorry, there was an error processing your request.",
+                    role: "model",
+                },
+            ]);
+        } finally {
             setIsLoading(false);
-        }, 1000);
-    };
-
-    const handleAttachFile = () => {
-        //
-    };
-
-    const handleMicrophoneClick = () => {
-        //
+        }
     };
 
     return (
@@ -123,24 +148,22 @@ export function AIChat() {
                 <ExpandableChatFooter>
                     <form
                         onSubmit={handleSubmit}
-                        className="relative rounded-lg border bg-background focus-within:ring-1 focus-within:ring-ring p-1"
+                        className="relative flex flex-row rounded-lg border bg-background p-1"
                     >
                         <Textarea
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
                             placeholder="Type your message..."
-                            className="min-h-12 resize-none bg-background border-0 p-3 shadow-none focus-visible:ring-0"
+                            maxLines={2}
+                            className="min-h-12 resize-none bg-background border-0 shadow-none"
                         />
-                        <div className="flex items-center p-3 pt-0 justify-between">
-                            <Button
-                                type="submit"
-                                size="sm"
-                                className="ml-auto gap-1.5"
-                            >
-                                Send Message
-                                <CornerDownLeft className="size-3.5" />
-                            </Button>
-                        </div>
+                        <Button
+                            type="submit"
+                            size="sm"
+                            className="ml-auto gap-1.5 self-center mr-1"
+                        >
+                            <CornerDownLeft className="size-3.5" />
+                        </Button>
                     </form>
                 </ExpandableChatFooter>
             </ExpandableChat>
