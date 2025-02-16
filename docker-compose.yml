@@ -8,7 +8,7 @@ services:
     environment:
       MONGO_URI: <MONGO_URI>
       SECRET_KEY: <SECRET_KEY>
-      GEMINI_API_KEY: <GGOGLE_API_KEY>
+      GOOGLE_API_KEY: <GGOGLE_API_KEY>
       SERAPI_KEY: <SERAPI_KEY>
       DEBUG: False
 
@@ -21,4 +21,4 @@ services:
     depends_on:
       - cc25-backend
     environment:
-      REACT_APP_API_URL: http://127.0.0.1:8000
+      REACT_APP_SERVER_URL: http://127.0.0.1:8000
