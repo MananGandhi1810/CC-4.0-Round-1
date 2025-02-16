@@ -1,12 +1,7 @@
-FROM node:lts-alpine AS builder
-WORKDIR /usr/src/app
-COPY . .
+FROM node:lts-alpine
+WORKDIR /app
+COPY package*.json ./
 RUN npm install
-RUN npm run build
-
-FROM node:lts-alpine AS production
-WORKDIR /usr/src/app
-COPY --from=builder /usr/src/app/dist ./dist
+COPY . .
 EXPOSE 3000
-USER node
-CMD ["npx", "serve", "-d", "dist", "-l", "3000"]
+CMD ["npm", "start"]
