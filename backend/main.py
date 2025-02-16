@@ -182,7 +182,8 @@ def analyze_competitors():
 
     filtered_response = model.generate_content(
         f"""
-        From this list of competitors, choose the 5 most relevant for analysis and return a JSON: {json.dumps(competitor_data)}
+        User's Idea: {idea}
+        From this list of urls, choose the 5 most relevant competitors for analysis and return a JSON: {json.dumps(competitor_data)}
 
         Use this JSON schema:
         Competitor = {{"url": ""}}
