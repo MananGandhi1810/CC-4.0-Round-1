@@ -221,4 +221,4 @@ def analyze_competitors():
 
 
 if __name__ == "__main__":
-    app.run(debug=os.getenv("DEBUG", False), port=8080)
+    app.run(debug=os.getenv("DEBUG", False), host='0.0.0.0', port=8080)
