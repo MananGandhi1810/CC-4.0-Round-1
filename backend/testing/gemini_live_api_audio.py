@@ -15,6 +15,7 @@ import argparse
 from google import genai
 
 from dotenv import load_dotenv
+
 load_dotenv()
 
 
@@ -32,11 +33,11 @@ CHUNK_SIZE = 1024
 
 MODEL = "models/gemini-2.0-flash-exp"
 
-DEFAULT_MODE = "screen"
+DEFAULT_MODE = "audio"
 
 client = genai.Client(
-    http_options={"api_version": "v1alpha"},
-    api_key=os.getenv("GOOGLE_API_KEY"))
+    http_options={"api_version": "v1alpha"}, api_key=os.getenv("GOOGLE_API_KEY")
+)
 
 # While Gemini 2.0 Flash is in experimental preview mode, only one of AUDIO or
 # TEXT may be passed here.

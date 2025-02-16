@@ -24,7 +24,7 @@ CORS(app)
 
 app.config["MONGO_URI"] = os.getenv("MONGO_URI")
 app.config["JWT_SECRET_KEY"] = os.getenv("SECRET_KEY")
-genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
+genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
 
 
 mongo = PyMongo(app)
@@ -154,24 +154,32 @@ def analyze_competitors():
     idea = data.get("idea")
     headers = {"User-Agent": "Mozilla/5.0"}
     model = genai.GenerativeModel("gemini-1.5-flash")
-    
-    response = model.generate_content(f"Generate an optimized Google search query to find companies or people with a similar idea: {idea}. Provide the search query only and make it a human readable query.")
+
+    response = model.generate_content(
+        f"Generate an optimized Google search query to find companies or people with a similar idea: {idea}. Provide the search query only and make it a human readable query."
+    )
     search_query = response.text
     print(search_query)
-    
+
     serp_params = {
         "api_key": os.getenv("SERPAPI_KEY"),
         "q": search_query,
         "num": 10,
         "engine": "google",
         "gl": "in",
-        "hl": "en"
+        "hl": "en",
     }
     serp_response = requests.get("https://serpapi.com/search", params=serp_params)
-    results = serp_response.json().get("organic_results", []) if serp_response.status_code == 200 else []
-    competitor_data = [{"url": r["link"], "description": r.get("snippet", "")} for r in results]
+    results = (
+        serp_response.json().get("organic_results", [])
+        if serp_response.status_code == 200
+        else []
+    )
+    competitor_data = [
+        {"url": r["link"], "description": r.get("snippet", "")} for r in results
+    ]
     print(competitor_data)
-    
+
     filtered_response = model.generate_content(
         f"""
         From this list of competitors, choose the 5 most relevant for analysis and return a JSON: {json.dumps(competitor_data)}
@@ -181,9 +189,11 @@ def analyze_competitors():
         Return: list[Competitor]
         """
     )
-    selected_urls = [c["url"] for c in json.loads(clean_json_response(filtered_response.text))]
+    selected_urls = [
+        c["url"] for c in json.loads(clean_json_response(filtered_response.text))
+    ]
     print(selected_urls)
-    
+
     scraped_data = []
     for url in selected_urls:
         try:
@@ -196,7 +206,7 @@ def analyze_competitors():
                 scraped_data.append({"url": url, "text": text})
         except requests.exceptions.RequestException:
             continue
-    
+
     final_analysis = model.generate_content(
         f"""
         Analyze these competitors and provide insights: {json.dumps(scraped_data)}
@@ -206,9 +216,9 @@ def analyze_competitors():
         Return: list[CompetitorAnalysis]
         """
     )
-    
+
     return jsonify(json.loads(clean_json_response(final_analysis.text)))
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5001)
+    app.run(debug=os.getenv("DEBUG", False), host='0.0.0.0', port=8080)

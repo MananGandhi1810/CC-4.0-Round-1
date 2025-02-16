@@ -1,0 +1,24 @@
+services:
+  cc25-backend:
+    image: ghcr.io/manangandhi1810/cc25-backend:latest
+    container_name: cc-25-backend
+    restart: unless-stopped
+    ports:
+      - 8000:8080/tcp
+    environment:
+      MONGO_URI: <MONGO_URI>
+      SECRET_KEY: <SECRET_KEY>
+      GOOGLE_API_KEY: <GGOGLE_API_KEY>
+      SERAPI_KEY: <SERAPI_KEY>
+      DEBUG: False
+
+  cc25-frontend:
+    image: ghcr.io/manangandhi1810/cc25-frontend:latest
+    container_name: cc25-frontend
+    restart: unless-stopped
+    ports:
+      - 3000:3000/tcp
+    depends_on:
+      - cc25-backend
+    environment:
+      REACT_APP_SERVER_URL: http://127.0.0.1:8000
