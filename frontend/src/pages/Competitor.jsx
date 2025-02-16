@@ -92,10 +92,12 @@ function Competitor() {
                             <Collapsible
                                 key={index}
                                 open={openCompetitor === index}
-                                onOpenChange={(open) => setOpenCompetitor(open ? index : null)}
+                                onOpenChange={(open) =>
+                                    setOpenCompetitor(open ? index : null)
+                                }
                             >
                                 <CollapsibleTrigger className="w-full px-4 py-3 bg-gray-700 hover:bg-gray-600 text-gray-100 rounded-lg text-left flex items-center justify-between">
-                                    <span>{competitor.name}</span> {/* Display competitor name */}
+                                    <span>{competitor.name}</span>{" "}
                                     <a
                                         href={competitor.url}
                                         target="_blank"
@@ -109,13 +111,19 @@ function Competitor() {
                                 </CollapsibleTrigger>
                                 <CollapsibleContent className="w-full">
                                     <Card className="mt-2 bg-gray-800 text-gray-100">
-                                        <CardContent className="pt-4">
-                                            <ScrollArea className="h-[400px]">
+                                        <ScrollArea className="w-full h-[400px]">
+                                            <CardContent className="pt-4">
                                                 <Markdown className="prose dark:prose-invert min-w-full">
-                                                    {competitor.analysis}
+                                                    {`${competitor.analysis}1b
+                                                    cjbckahcblksdhcsduhc
+                                                    dsiacdslichsd}${competitor.analysis}1b
+                                                    cjbckahcblksdhcsduhc
+                                                    dsiacdslichsd}${competitor.analysis}1b
+                                                    cjbckahcblksdhcsduhc
+                                                    dsiacdslichsd}`}
                                                 </Markdown>
-                                            </ScrollArea>
-                                        </CardContent>
+                                            </CardContent>
+                                        </ScrollArea>
                                     </Card>
                                 </CollapsibleContent>
                             </Collapsible>
