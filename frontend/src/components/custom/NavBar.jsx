@@ -72,7 +72,7 @@ export default function NavBar() {
                             to="/whiteboard"
                             className="text-gray-100 hover:text-white relative after:bg-white after:absolute after:h-0.5 after:w-0 after:-bottom-1 after:left-0 hover:after:w-full after:transition-all duration-300"
                         >
-                            AI WhiteBoarding
+                            WhiteBoard
                         </Link>
                         <Link
                             to="/competitor"
@@ -170,7 +170,7 @@ export default function NavBar() {
                                         to="/whiteboard"
                                         className="text-sm font-medium text-gray-100 hover:text-white"
                                     >
-                                        AI WhiteBoarding
+                                        WhiteBoard
                                     </Link>
                                     <Link
                                         to="/competitor"
