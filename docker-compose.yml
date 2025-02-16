@@ -20,16 +20,12 @@ services:
       - 3000:3000/tcp
     depends_on:
       - cc25-backend
-    volumes:
-      - ./frontend:/app
 
   cc25-frontend-ws:
-    image: ghcr.io/manangandhi1810/cc25-frontend-ws:latest
+    build: ./frontend-ws
     container_name: cc25-frontend-ws
     restart: unless-stopped
     ports:
       - 3001:3000/tcp
     depends_on:
       - cc25-backend
-    volumes:
-      - ./frontend-ws:/app
