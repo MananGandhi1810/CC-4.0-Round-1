@@ -39,16 +39,14 @@ function Competitor() {
         setLoading(true);
         try {
             // Simulate API call with 1 second delay
-            // const response = await axios.post(
-            //     `${process.env.SERVER_URL}/competitors`,
-            //     { idea },
-            //     {
-            //         headers: { "Content-Type": "application/json" },
-            //     },
-            // );
-            // setAnalysis(response.data);
-            await new Promise((resolve) => setTimeout(resolve, 1000));
-            setAnalysis(dummyData);
+            const response = await axios.post(
+                `${process.env.SERVER_URL}/analyze_competitors`,
+                { idea },
+                {
+                    headers: { "Content-Type": "application/json" },
+                },
+            );
+            setAnalysis(response.data);
         } catch (error) {
             console.error("Error analyzing competitors:", error);
         }
@@ -90,16 +88,14 @@ function Competitor() {
             {analysis && (
                 <div className="w-full max-w-4xl">
                     <div className="space-y-4">
-                        {analysis.competitors.map((competitor, index) => (
+                        {analysis.map((competitor, index) => (
                             <Collapsible
                                 key={index}
                                 open={openCompetitor === index}
-                                onOpenChange={(open) =>
-                                    setOpenCompetitor(open ? index : null)
-                                }
+                                onOpenChange={(open) => setOpenCompetitor(open ? index : null)}
                             >
                                 <CollapsibleTrigger className="w-full px-4 py-3 bg-gray-700 hover:bg-gray-600 text-gray-100 rounded-lg text-left flex items-center justify-between">
-                                    <span>Competitor {index + 1}</span>
+                                    <span>{competitor.name}</span> {/* Display competitor name */}
                                     <a
                                         href={competitor.url}
                                         target="_blank"

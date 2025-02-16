@@ -16,7 +16,6 @@ import google.generativeai as genai
 from datetime import timedelta
 from bs4 import BeautifulSoup
 import requests
-from pydantic import BaseModel
 
 dotenv.load_dotenv()
 
@@ -165,7 +164,7 @@ def analyze_competitors():
         "q": search_query,
         "num": 10,
         "engine": "google",
-        "gl": "us",
+        "gl": "in",
         "hl": "en"
     }
     serp_response = requests.get("https://serpapi.com/search", params=serp_params)
