@@ -15,6 +15,7 @@ import NoPageFound from "@/pages/404.jsx";
 import IdeaFeedback from "./pages/IdeaFeedback";
 import WhiteBoard from "./pages/WhiteBoard";
 import Competitor from "./pages/Competitor";
+import TaskList from "./pages/TaskList";
 
 function App() {
     const initialState = {
@@ -124,6 +125,16 @@ function App() {
                         return null;
                     },
                     element: <Competitor />,
+                },
+                {
+                    path: "/tasks",
+                    loader: ({ request }) => {
+                        if (!user.isAuthenticated) {
+                            return redirect("/login?next=/competitors");
+                        }
+                        return null;
+                    },
+                    element: <TaskList />,
                 },
                 {
                     path: "*",
