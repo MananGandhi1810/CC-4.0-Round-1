@@ -57,12 +57,12 @@ function Home() {
                             <CardHeader>
                                 <TrendingUp className="w-12 h-12 mx-auto text-purple-500" />
                                 <CardTitle className="text-gray-100">
-                                    Growth Strategy
+                                    AI Companion
                                 </CardTitle>
                             </CardHeader>
                             <CardContent className="text-gray-300">
-                                Get actionable recommendations for business
-                                growth
+                                A realtime AI Companion who can help you
+                                brainstorm ideas
                             </CardContent>
                         </Card>
                     </div>
