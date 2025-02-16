@@ -6,7 +6,7 @@ services:
     ports:
       - 8080:8080/tcp
     env_file:
-      - .env
+      - ./backend/.env
 
   cc25-frontend:
     image: ghcr.io/manangandhi1810/cc25-frontend:latest
@@ -17,4 +17,4 @@ services:
     depends_on:
       - cc25-backend
     env_file:
-      - .env
+      - ./frontend/.env
