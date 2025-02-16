@@ -87,7 +87,7 @@ export default function NavBar() {
                             Competitors
                         </Link>
                         <a
-                            href="/startup_sensei"
+                            href="https://startupsensei.mpst.me/"
                             className="text-gray-100 hover:text-white relative after:bg-white after:absolute after:h-0.5 after:w-0 after:-bottom-1 after:left-0 hover:after:w-full after:transition-all duration-300"
                         >
                             Startup Sensei
@@ -197,7 +197,7 @@ export default function NavBar() {
                                         Competitors
                                     </Link>
                                     <Link
-                                        to="/startup_sensei"
+                                        to="https://startupsensei.mpst.me/"
                                         className="text-sm font-medium text-gray-100 hover:text-white"
                                     >
                                         Startup Sensei
