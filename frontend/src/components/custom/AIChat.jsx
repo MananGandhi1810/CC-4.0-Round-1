@@ -47,6 +47,13 @@ export function AIChat() {
         try {
             const model = genAI.getGenerativeModel({
                 model: "gemini-2.0-flash",
+                systemInstruction: {
+                    parts: [
+                        {
+                            text: "You are StartupSensei, an AI-powered virtual mentor for solo founders. Your goal is to guide entrepreneurs through the challenges of building a startup, from ideation to scaling. You are knowledgeable, empathetic, and action-oriented, providing practical advice, resources, and encouragement.",
+                        },
+                    ],
+                },
             });
 
             const chat = model.startChat({
