@@ -11,21 +11,3 @@ services:
       GOOGLE_API_KEY: <GGOGLE_API_KEY>
       SERAPI_KEY: <SERAPI_KEY>
       DEBUG: False
-
-  cc25-frontend:
-    image: ghcr.io/manangandhi1810/cc25-frontend:latest
-    container_name: cc25-frontend
-    restart: unless-stopped
-    ports:
-      - 3000:3000/tcp
-    depends_on:
-      - cc25-backend
-
-  cc25-frontend-ws:
-    build: ./frontend-ws
-    container_name: cc25-frontend-ws
-    restart: unless-stopped
-    ports:
-      - 3001:3000/tcp
-    depends_on:
-      - cc25-backend
