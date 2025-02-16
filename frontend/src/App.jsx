@@ -130,7 +130,7 @@ function App() {
                     path: "/tasks",
                     loader: ({ request }) => {
                         if (!user.isAuthenticated) {
-                            return redirect("/login?next=/competitors");
+                            return redirect("/login?next=/tasks");
                         }
                         return null;
                     },

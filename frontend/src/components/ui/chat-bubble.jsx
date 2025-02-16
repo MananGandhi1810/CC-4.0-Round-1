@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { MessageLoading } from "@/components/ui/message-loading";
+import Markdown from "react-markdown";
 
 export function ChatBubble({
     variant = "received",
@@ -46,7 +47,7 @@ export function ChatBubbleMessage({
                     <MessageLoading />
                 </div>
             ) : (
-                children
+                <Markdown>{children}</Markdown>
             )}
         </div>
     );

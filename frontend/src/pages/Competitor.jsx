@@ -19,21 +19,6 @@ function Competitor() {
     const [analysis, setAnalysis] = useState(null);
     const [openCompetitor, setOpenCompetitor] = useState(null);
 
-    const dummyData = {
-        competitors: [
-            {
-                url: "https://germanwithlaura.com/noun-cases/",
-                analysis:
-                    'Company Name: German With Laura\n\nDescription: German With Laura offers online German language instruction, focusing on grammar, specifically German noun cases. The content aims to demystify complex grammatical concepts for English speakers.\n\nUnique Selling Points (USPs):\n* Focus on German noun cases\n* Comparison to English grammar\n* Clear and simple explanations\n* "Shortcuts" and special exceptions\n* Fact-checked content',
-            },
-            {
-                url: "https://www.belkin.com/products/product-resources/screen-protector-buying-guide/",
-                analysis:
-                    "Company Name: Belkin\n\nDescription: Belkin sells a wide range of electronic accessories, including screen protectors, wireless chargers, cables, adapters, and more.\n\nUnique Selling Points (USPs):\n* Wide range of products\n* Brand recognition\n* Specific device compatibility\n* Belkin Rewards program",
-            },
-        ],
-    };
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
@@ -114,13 +99,7 @@ function Competitor() {
                                         <ScrollArea className="w-full h-[400px]">
                                             <CardContent className="pt-4">
                                                 <Markdown className="prose dark:prose-invert min-w-full">
-                                                    {`${competitor.analysis}1b
-                                                    cjbckahcblksdhcsduhc
-                                                    dsiacdslichsd}${competitor.analysis}1b
-                                                    cjbckahcblksdhcsduhc
-                                                    dsiacdslichsd}${competitor.analysis}1b
-                                                    cjbckahcblksdhcsduhc
-                                                    dsiacdslichsd}`}
+                                                    {competitor.analysis}
                                                 </Markdown>
                                             </CardContent>
                                         </ScrollArea>
