@@ -12,7 +12,7 @@ export default defineConfig((mode) => {
             },
         },
         define: {
-            "process.env.SERVER_URL": "https://cc-backend.mpst.me",
+            "process.env.SERVER_URL": JSON.stringify("https://cc-backend.mpst.me"),
         },
     };
 });
